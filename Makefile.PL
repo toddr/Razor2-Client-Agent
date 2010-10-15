@@ -11,8 +11,7 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile (
-    DISTNAME      => 'razor-agents',
-    NAME          => 'razor-agents',
+    NAME          => 'Razor2::Client::Agent',
     AUTHOR        => 'Vipul Ved Prakash <mail@vipul.net>',
     ABSTRACT      => 'Collaborative, content-based spam filtering network agent.',
     VERSION_FROM  => 'lib/Razor2/Client/Version.pm', 
@@ -33,11 +32,20 @@ WriteMakefile (
                        'docs/razor-admin.pod'    => '$(INST_MAN1DIR)/razor-admin.1',
                        'docs/razor-revoke.pod'   => '$(INST_MAN1DIR)/razor-revoke.1',
                      },
-    dist          => {
-                       'COMPRESS'   => 'bzip2',
-                       'SUFFIX'     => '.bz2',
-                       'TARFLAGS'   => '--owner root --group root -cvf',
-                     },
+    dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean               => { FILES => 'Razor2-Client-Agent*' },
+    META_MERGE  => {
+        build_requires => {
+            'Test::More' => 0,  # For testing
+        },
+        resources => {
+            license => 'http://dev.perl.org/licenses/',
+            homepage => 'http://razor.sourceforge.net/',
+            bugtracker => 'http://sourceforge.net/projects/razor',
+            repository => 'http://github.com/toddr/Razor2-Client-Agent',
+            MailingList => 'https://sourceforge.net/mailarchive/forum.php?forum_name=razor-users',
+        },
+    },
 );
 
 {

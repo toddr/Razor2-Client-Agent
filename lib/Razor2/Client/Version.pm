@@ -14,7 +14,7 @@ use vars qw($PROTOCOL $VERSION);
 
 $PROTOCOL = 3;
 
-$VERSION = '2.84';
+$VERSION = '2.83';
 
 1;
 
