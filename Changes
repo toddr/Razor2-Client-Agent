@@ -4,6 +4,16 @@
 
 Changes - razor-agents
 
+=head2 2.85 (July 21, 2008)
+
+=over 4
+
+=item *
+
+Relicense under Artistic License 2.0.  See LICENSE for details.
+
+=back
+
 =head2 2.84 (May 10, 2007)
 
 =over 4

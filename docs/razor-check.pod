@@ -157,5 +157,5 @@ razor-report(1), razor-revoke(1), razor-whitelist(5)
 
 =head1 LICENSE 
 
-This is free software, distributed under the ARTISTIC license.
+This is free software, distributed under the Artistic License 2.0.
 
