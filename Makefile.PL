@@ -147,10 +147,9 @@ sub MY::install {
   my $self = shift;
   my $inherited = $self->SUPER::install(@_);
 
-  my $man5 = q{ \\
-		$(INST_MAN5DIR) $(INSTALLMAN5DIR)};
+  $inherited =~ s{(\$\((?:DEST)?INSTALL\w*MAN1DIR\)("?))}{$1 \\
+		$2\$(INST_MAN5DIR)$2 $2\$(INSTALLMAN5DIR)$2}gm;
 
-  $inherited =~ s/(\$\((?:DEST)?INSTALL\w*MAN1DIR\))/$1$man5/gm;
 
   return $inherited;
 }
