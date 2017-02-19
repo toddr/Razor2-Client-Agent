@@ -41,6 +41,13 @@ sub new {
         };
         LOGF->autoflush(1);
         $self->{fd} = *LOGF{IO};
+    } elsif ($self->{LogTo} eq 'none') {
+        $self->{LogType} = 'null';
+        open (LOGF, '>>/dev/null') or do {
+            die $!;
+        };
+        LOGF->autoflush(1);
+        $self->{fd} = *LOGF{IO};
     } elsif ($self->{LogTo} eq 'sys-syslog') { 
         # 2003/09/10 Anne Bennett: syslog of our choice (uses socket,
         # does not assume network listener).

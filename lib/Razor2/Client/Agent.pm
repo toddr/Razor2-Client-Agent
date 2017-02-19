@@ -126,6 +126,8 @@ sub do_conf {
         $logto = 'syslog';
     } elsif ($self->{conf}->{logfile} eq 'sys-syslog') {
         $logto = 'sys-syslog';
+    } elsif ($self->{conf}->{logfile} eq 'none') {
+        $logto = 'none';
     } else {
         $logto = "file:$self->{conf}->{logfile}";
     }

@@ -101,7 +101,7 @@ sub read_conf {
                  listfile_discovery whitelist identity)) {
         next unless $conf->{$_};
         next if $conf->{$_} =~ /^\//;
-        next if ($_ eq 'logfile' && ($conf->{$_} eq 'syslog' || $conf->{$_} eq 'sys-syslog'));
+        next if ($_ eq 'logfile' && ($conf->{$_} eq 'syslog' || $conf->{$_} eq 'sys-syslog' || $conf->{$_} eq 'none'));
         $conf->{$_} = "$self->{razorhome}/$conf->{$_}";
     }
     }
