@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/toddr/Razor2-Client-Agent.png?branch=master)](https://travis-ci.org/toddr/Razor2-Client-Agent)
 
                     Vipul's Razor v2 README
 
