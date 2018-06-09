@@ -8,13 +8,14 @@ require DynaLoader;
 require AutoLoader;
 
 @ISA = qw(Exporter DynaLoader);
+
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
 # Do not simply export all your public functions/methods/constants.
 @EXPORT = qw(
-	
+
 );
-$VERSION = '2.18';
+$VERSION = '2.84';
 
 bootstrap Razor2::Preproc::deHTMLxs $VERSION;
 
@@ -24,6 +25,7 @@ bootstrap Razor2::Preproc::deHTMLxs $VERSION;
 
 1;
 __END__
+
 # Below is the stub of documentation for your module. You better edit it!
 
 =head1 NAME

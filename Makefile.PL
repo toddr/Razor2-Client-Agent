@@ -11,11 +11,13 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile (
-    NAME          => 'Razor2::Client::Agent',
+    NAME          => 'Razor2::Preproc::deHTMLxs', # We have to set the name here because it's what .so file is generated.
+    DISTNAME     => 'Razor2-Client-Agent',
+    DISTVNAME     => 'Razor2-Client-Agent',
     AUTHOR        => 'Vipul Ved Prakash <mail@vipul.net>',
     ABSTRACT      => 'Collaborative, content-based spam filtering network agent.',
-    VERSION_FROM  => 'lib/Razor2/Client/Version.pm', 
-    EXE_FILES     => [ qw( bin/razor-client bin/razor-admin bin/razor-check bin/razor-report bin/razor-revoke ) ], 
+    VERSION_FROM  => 'lib/Razor2/Client/Version.pm',
+    EXE_FILES     => [ qw( bin/razor-client bin/razor-admin bin/razor-check bin/razor-report bin/razor-revoke ) ],
     PREREQ_PM     => { 
                        'Digest::SHA1'     => 0,
                        'File::Copy'       => 0,
@@ -34,6 +36,7 @@ WriteMakefile (
                      },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Razor2-Client-Agent*' },
+    'OBJECT'    => q[_deHTMLxs$(OBJ_EXT) deHTMLxs$(OBJ_EXT)],
     META_MERGE  => {
         build_requires => {
             'Test::More' => 0,  # For testing
