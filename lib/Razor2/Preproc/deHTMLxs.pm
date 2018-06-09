@@ -1,21 +1,18 @@
 package Razor2::Preproc::deHTMLxs;
 
 use strict;
-use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
 require Exporter;
 require DynaLoader;
 require AutoLoader;
 
-@ISA = qw(Exporter DynaLoader);
+our @ISA = qw(Exporter DynaLoader);
 
 # Items to export into callers namespace by default. Note: do not export
 # names by default without a very good reason. Use EXPORT_OK instead.
 # Do not simply export all your public functions/methods/constants.
-@EXPORT = qw(
-
-);
-$VERSION = '2.84';
+our @EXPORT = qw();
+our $VERSION = '2.84';
 
 bootstrap Razor2::Preproc::deHTMLxs $VERSION;
 

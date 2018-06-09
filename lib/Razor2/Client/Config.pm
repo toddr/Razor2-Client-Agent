@@ -11,7 +11,6 @@
 package Razor2::Client::Config;
 use strict;
 use Data::Dumper;
-use vars qw( $VERSION );
 use File::Copy;
 use File::Spec;
 

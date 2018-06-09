@@ -9,10 +9,10 @@ use Data::Dumper;
 #use MIME::Parser;
 
 require Exporter;
-use vars qw ( @ISA $VERSION @EXPORT );
-@ISA = qw(Exporter);
 
-@EXPORT = qw( hmac_sha1 xor_key
+our @ISA = qw(Exporter);
+
+our @EXPORT = qw( hmac_sha1 xor_key
   from_batched_query
   to_batched_query findsimilar debugobj
   makesis parsesis makesis_nue parsesis_nue

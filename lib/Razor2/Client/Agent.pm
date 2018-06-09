@@ -23,10 +23,9 @@ use base qw(Razor2::Logger);
 use base qw(Razor2::String);
 use Razor2::Preproc::Manager;
 use Data::Dumper;
-use vars qw( $VERSION $PROTOCOL );
 
-$PROTOCOL = $Razor2::Client::Version::PROTOCOL;
-$VERSION  = $Razor2::Client::Version::VERSION;
+our $PROTOCOL = $Razor2::Client::Version::PROTOCOL;
+our $VERSION  = $Razor2::Client::Version::VERSION;
 
 sub new {
     my ( $class, $breed ) = @_;

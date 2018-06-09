@@ -17,7 +17,6 @@ use Errno qw(:POSIX);
 
 use Razor2::Client::Version;
 use Data::Dumper;
-use vars qw( $VERSION $PROTOCOL );
 use base qw(Razor2::String);
 use base qw(Razor2::Logger);
 use base qw(Razor2::Client::Engine);
@@ -28,8 +27,8 @@ use Razor2::String qw(hextobase64 makesis parsesis hmac_sha1 xor_key
   from_batched_query hexbits2hash
   fisher_yates_shuffle);
 
-($VERSION) = do { my @r = ( q$Revision: 1.92 $ =~ /\d+/g ); sprintf "%d." . "%02d" x $#r, @r };
-$PROTOCOL = $Razor2::Client::Version::PROTOCOL;
+our ($VERSION) = do { my @r = ( q$Revision: 1.92 $ =~ /\d+/g ); sprintf "%d." . "%02d" x $#r, @r };
+our $PROTOCOL = $Razor2::Client::Version::PROTOCOL;
 
 sub new {
     my ( $class, $conf, %params ) = @_;
