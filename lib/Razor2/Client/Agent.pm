@@ -10,7 +10,7 @@
 
 package Razor2::Client::Agent;
 
-use lib qw(lib);
+
 use strict;
 use Getopt::Long;
 use IO::File;
