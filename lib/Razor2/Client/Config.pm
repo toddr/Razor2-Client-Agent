@@ -102,7 +102,7 @@ sub read_conf {
         foreach (
             qw( logfile pidfile listfile_catalogue listfile_nomination
             listfile_discovery whitelist identity)
-          ) {
+        ) {
             next unless $conf->{$_};
             next if $conf->{$_} =~ /^\//;
             next if ( $_ eq 'logfile' && ( $conf->{$_} eq 'syslog' || $conf->{$_} eq 'sys-syslog' || $conf->{$_} eq 'none' ) );

@@ -549,7 +549,7 @@ sub randstr {
 sub escape_smtp_terminator {
 
     my ($textref) = @_;
-    $$textref =~ s/\r\n\./\r\n\.\./gm
+    $$textref =~ s/\r\n\./\r\n\.\./gm;
 
 }
 

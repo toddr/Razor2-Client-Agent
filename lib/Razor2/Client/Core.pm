@@ -944,7 +944,7 @@ sub check {
         if (
             $obj->{e1}    # cmd-line sig checks don't have this
             && $self->{s}->{engines}->{1}
-          ) {
+        ) {
             $obj->{e1}->{sent} = $self->make_query(
                 {
                     action => 'check',
@@ -1479,7 +1479,7 @@ sub report {
                         "mail $objp->{id}, eng $self->{s}->{conf}->{dre}",
                         $objp->{sent}->[0], $objp->{resp}->[0]
                     )
-                  ) {
+                ) {
                     $objp->{skipme} = 1;
                 }
                 else {

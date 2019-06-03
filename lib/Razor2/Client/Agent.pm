@@ -10,7 +10,6 @@
 
 package Razor2::Client::Agent;
 
-
 use strict;
 use Getopt::Long;
 use IO::File;

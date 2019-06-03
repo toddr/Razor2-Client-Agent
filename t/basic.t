@@ -20,7 +20,7 @@ foreach my $html_fn (
     qw(
     html.1 html.2 html.3 html.4 html.5 html.6 html.7 html.8
     )
-  ) {
+) {
 
     my $loop_error = 0;
 

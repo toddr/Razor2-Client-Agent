@@ -10,59 +10,60 @@
 
 use ExtUtils::MakeMaker;
 
-WriteMakefile (
-    NAME          => 'Razor2::Preproc::deHTMLxs', # We have to set the name here because it's what .so file is generated.
+WriteMakefile(
+    NAME         => 'Razor2::Preproc::deHTMLxs',                                                                  # We have to set the name here because it's what .so file is generated.
     DISTNAME     => 'Razor2-Client-Agent',
-    DISTVNAME     => 'Razor2-Client-Agent',
-    AUTHOR        => 'Vipul Ved Prakash <mail@vipul.net>',
-    ABSTRACT      => 'Collaborative, content-based spam filtering network agent.',
-    VERSION_FROM  => 'lib/Razor2/Client/Version.pm',
-    EXE_FILES     => [ qw( bin/razor-client bin/razor-admin bin/razor-check bin/razor-report bin/razor-revoke ) ],
-    PREREQ_PM     => { 
-                       'Digest::SHA1'     => 0,
-                       'File::Copy'       => 0,
-                       'File::Spec'       => 0,
-                       'Getopt::Long'     => 0,
-                       'MIME::Base64'     => 0,
-                       'Test::More'       => 0,
-                       'Time::HiRes'      => 0,
-                       'URI::Escape'      => 0,
-                     },
-	MAN1PODS      => { 
-                       'docs/razor-check.pod'    => '$(INST_MAN1DIR)/razor-check.1',
-                       'docs/razor-report.pod'   => '$(INST_MAN1DIR)/razor-report.1',
-                       'docs/razor-admin.pod'    => '$(INST_MAN1DIR)/razor-admin.1',
-                       'docs/razor-revoke.pod'   => '$(INST_MAN1DIR)/razor-revoke.1',
-                     },
-    dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean               => { FILES => 'Razor2-Client-Agent*' },
-    'OBJECT'    => q[_deHTMLxs$(OBJ_EXT) deHTMLxs$(OBJ_EXT)],
-    META_MERGE  => {
+    DISTVNAME    => 'Razor2-Client-Agent',
+    AUTHOR       => 'Vipul Ved Prakash <mail@vipul.net>',
+    ABSTRACT     => 'Collaborative, content-based spam filtering network agent.',
+    VERSION_FROM => 'lib/Razor2/Client/Version.pm',
+    EXE_FILES    => [qw( bin/razor-client bin/razor-admin bin/razor-check bin/razor-report bin/razor-revoke )],
+    PREREQ_PM    => {
+        'Digest::SHA1' => 0,
+        'File::Copy'   => 0,
+        'File::Spec'   => 0,
+        'Getopt::Long' => 0,
+        'MIME::Base64' => 0,
+        'Test::More'   => 0,
+        'Time::HiRes'  => 0,
+        'URI::Escape'  => 0,
+    },
+    MAN1PODS => {
+        'docs/razor-check.pod'  => '$(INST_MAN1DIR)/razor-check.1',
+        'docs/razor-report.pod' => '$(INST_MAN1DIR)/razor-report.1',
+        'docs/razor-admin.pod'  => '$(INST_MAN1DIR)/razor-admin.1',
+        'docs/razor-revoke.pod' => '$(INST_MAN1DIR)/razor-revoke.1',
+    },
+    dist       => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean      => { FILES    => 'Razor2-Client-Agent*' },
+    'OBJECT'   => q[_deHTMLxs$(OBJ_EXT) deHTMLxs$(OBJ_EXT)],
+    META_MERGE => {
         build_requires => {
-            'Test::More' => 0,  # For testing
+            'Test::More' => 0,    # For testing
         },
         resources => {
-            license => 'http://dev.perl.org/licenses/',
-            homepage => 'http://razor.sourceforge.net/',
-            bugtracker => 'http://sourceforge.net/projects/razor',
-            repository => 'http://github.com/toddr/Razor2-Client-Agent',
+            license     => 'http://dev.perl.org/licenses/',
+            homepage    => 'http://razor.sourceforge.net/',
+            bugtracker  => 'http://sourceforge.net/projects/razor',
+            repository  => 'http://github.com/toddr/Razor2-Client-Agent',
             MailingList => 'https://sourceforge.net/mailarchive/forum.php?forum_name=razor-users',
         },
     },
 );
 
 {
-package MY;
 
-sub constants {
+    package MY;
 
-    my $self = shift;
-    my $inherited = $self->SUPER::constants(@_);
+    sub constants {
 
-    my $prefix = $ExtUtils::MakeMaker::VERSION >= 6.18 ? 'SITEPREFIX' : 
-                                                         'PERLPREFIX';
+        my $self      = shift;
+        my $inherited = $self->SUPER::constants(@_);
 
-    my $man5 = sprintf <<'MAKE', $prefix;
+        my $prefix = $ExtUtils::MakeMaker::VERSION >= 6.18 ? 'SITEPREFIX' :
+          'PERLPREFIX';
+
+        my $man5 = sprintf <<'MAKE', $prefix;
 
 # begin razor-agents
 MAN5PODS = docs/razor-agent.conf.pod \
@@ -77,23 +78,22 @@ MAN5EXT = 5
 
 MAKE
 
-    return $inherited . $man5;
+        return $inherited . $man5;
 
-}
+    }
 
+    sub MY::top_targets {
 
-sub MY::top_targets {
+        use Config;
 
-    use Config;
+        my $self      = shift;
+        my $inherited = $self->SUPER::top_targets(@_);
 
-    my $self = shift;
-    my $inherited = $self->SUPER::top_targets(@_);
+        my ($perlh) = $self->catfile( $Config{archlibexp}, 'CORE', "perl.h" );
 
-    my ($perlh) = $self->catfile($Config{archlibexp}, 'CORE', "perl.h");
+        my $noecho = q{NOECHO = @} unless $inherited =~ /NOECHO/;
 
-    my $noecho = q{NOECHO = @} unless $inherited =~ /NOECHO/;
-
-    my $man5 = sprintf <<'MAKE_FRAG', $perlh, $perlh;
+        my $man5 = sprintf <<'MAKE_FRAG', $perlh, $perlh;
 
 # begin razor-agents
 config :: $(INST_MAN5DIR)/.exists
@@ -107,21 +107,22 @@ $(INST_MAN5DIR)/.exists :: %s
 
 MAKE_FRAG
 
-    return $inherited . $man5;
-}
+        return $inherited . $man5;
+    }
 
+    sub MY::manifypods {
+        my $self      = shift;
+        my $inherited = $self->SUPER::manifypods(@_);
 
-sub MY::manifypods {
-    my $self = shift;
-    my $inherited = $self->SUPER::manifypods(@_);
+        $inherited =~ s{^(manifypods : .*)\\}{$1 manifypods-razor \\}m;
 
-    $inherited =~ s{^(manifypods : .*)\\}{$1 manifypods-razor \\}m;
+        # MakeMaker 6.06_x through 6.13 eliminated the POD2MAN macro.
+        my $pod2man =
+          $inherited =~ /^POD2MAN\b/m
+          ? ''
+          : 'POD2MAN = $(POD2MAN_EXE)';
 
-    # MakeMaker 6.06_x through 6.13 eliminated the POD2MAN macro.
-    my $pod2man = $inherited =~ /^POD2MAN\b/m ? ''
-                                              : 'POD2MAN = $(POD2MAN_EXE)';
-
-    my $manifypods_razor = sprintf <<'MAKE_FRAG', $pod2man;
+        my $manifypods_razor = sprintf <<'MAKE_FRAG', $pod2man;
 
 # begin razor-agents
 %s
@@ -140,21 +141,19 @@ manifypods-razor : docs/razor-agent.conf.pod \
 #end razor-agents
 MAKE_FRAG
 
-    return $inherited . "\n" . $manifypods_razor;
+        return $inherited . "\n" . $manifypods_razor;
 
-}
+    }
 
+    sub MY::install {
 
-sub MY::install {
+        my $self      = shift;
+        my $inherited = $self->SUPER::install(@_);
 
-  my $self = shift;
-  my $inherited = $self->SUPER::install(@_);
-
-  $inherited =~ s{(\$\((?:DEST)?INSTALL\w*MAN1DIR\)("?))}{$1 \\
+        $inherited =~ s{(\$\((?:DEST)?INSTALL\w*MAN1DIR\)("?))}{$1 \\
 		$2\$(INST_MAN5DIR)$2 $2\$(INSTALLMAN5DIR)$2}gm;
 
-
-  return $inherited;
-}
+        return $inherited;
+    }
 
 }
