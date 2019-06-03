@@ -8,17 +8,20 @@
 ##
 ## $Id: Makefile.PL,v 1.30 2007/05/08 22:47:53 rsoderberg Exp $
 
+our $VERSION = "2.85";
+
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME         => 'Razor2::Preproc::deHTMLxs',                                                                  # We have to set the name here because it's what .so file is generated.
+    NAME         => 'Razor2::Preproc::deHTMLxs',                                    # We have to set the name here because it's what .so file is generated.
     DISTNAME     => 'Razor2-Client-Agent',
-    DISTVNAME    => 'Razor2-Client-Agent',
+    DISTVNAME    => "Razor2-Client-Agent-$VERSION",
     AUTHOR       => 'Vipul Ved Prakash <mail@vipul.net>',
     ABSTRACT     => 'Collaborative, content-based spam filtering network agent.',
     VERSION_FROM => 'lib/Razor2/Client/Version.pm',
-    EXE_FILES    => [qw( bin/razor-client bin/razor-admin bin/razor-check bin/razor-report bin/razor-revoke )],
-    PREREQ_PM    => {
+    ( $ExtUtils::MakeMaker::VERSION >= 6.3002 ? ( 'LICENSE' => 'perl', ) : () ),
+    EXE_FILES => [qw( bin/razor-client bin/razor-admin bin/razor-check bin/razor-report bin/razor-revoke )],
+    PREREQ_PM => {
         'Digest::SHA1' => 0,
         'File::Copy'   => 0,
         'File::Spec'   => 0,
@@ -35,18 +38,17 @@ WriteMakefile(
         'docs/razor-revoke.pod' => '$(INST_MAN1DIR)/razor-revoke.1',
     },
     dist       => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean      => { FILES    => 'Razor2-Client-Agent*' },
+    clean      => { FILES    => 'Razor2-Client-Agent-*' },
     'OBJECT'   => q[_deHTMLxs$(OBJ_EXT) deHTMLxs$(OBJ_EXT)],
     META_MERGE => {
-        build_requires => {
-            'Test::More' => 0,    # For testing
-        },
         resources => {
-            license     => 'http://dev.perl.org/licenses/',
-            homepage    => 'http://razor.sourceforge.net/',
-            bugtracker  => 'http://sourceforge.net/projects/razor',
-            repository  => 'http://github.com/toddr/Razor2-Client-Agent',
-            MailingList => 'https://sourceforge.net/mailarchive/forum.php?forum_name=razor-users',
+            license => 'http://dev.perl.org/licenses/',
+
+            #homepage    => 'http://razor.sourceforge.net/',
+            bugtracker => 'https://github.com/toddr/Razor2-Client-Agent/issues',
+            repository => 'http://github.com/toddr/Razor2-Client-Agent',
+
+            #MailingList => 'https://sourceforge.net/mailarchive/forum.php?forum_name=razor-users',
         },
     },
 );
@@ -60,8 +62,10 @@ WriteMakefile(
         my $self      = shift;
         my $inherited = $self->SUPER::constants(@_);
 
-        my $prefix = $ExtUtils::MakeMaker::VERSION >= 6.18 ? 'SITEPREFIX' :
-          'PERLPREFIX';
+        my $prefix =
+          $ExtUtils::MakeMaker::VERSION >= 6.18
+          ? 'SITEPREFIX'
+          : 'PERLPREFIX';
 
         my $man5 = sprintf <<'MAKE', $prefix;
 
