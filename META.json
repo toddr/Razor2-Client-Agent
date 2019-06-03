@@ -58,6 +58,6 @@
       },
       "x_MailingList" : "https://sourceforge.net/mailarchive/forum.php?forum_name=razor-users"
    },
-   "version" : "2.84",
+   "version" : "2.85",
    "x_serialization_backend" : "JSON::PP version 2.97001"
 }

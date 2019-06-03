@@ -12,7 +12,7 @@ package Razor2::Client::Version;
 use strict;
 
 our $PROTOCOL = 3;
-our $VERSION  = '2.84';
+our $VERSION  = '2.85';
 
 1;
 
