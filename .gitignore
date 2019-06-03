@@ -1,16 +1,33 @@
-/Makefile
-/blib/
-/pm_to_blib
-/Razor2-Client-Agent*
-/.DS_Store
-/Makefile.old
-/MYMETA.json
-/MYMETA.yml
-/MANIFEST.bak
-*.orig
-*.rej
-*.c
+!Build/
+.last_cover_stats
+/MYMETA.*
 *.o
+*.pm.tdy
 *.bs
-*.tar
-*.tar.gz
+
+# Devel::Cover
+cover_db/
+
+# Devel::NYTProf
+nytprof.out
+
+# Dizt::Zilla
+/.build/
+
+# Module::Build
+_build/
+Build
+Build.bat
+
+# Module::Install
+inc/
+
+# ExtUtils::MakeMaker
+/blib/
+/_eumm/
+/*.gz
+/Makefile
+/Makefile.old
+/MANIFEST.bak
+/pm_to_blib
+/*.zip
