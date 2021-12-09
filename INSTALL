@@ -25,7 +25,7 @@ option, like so:
    following Perl modules from CPAN:
 
             Time::HiRes
-            Digest::SHA1
+            Digest::SHA
             MIME::Base64
             Test::Simple
             Test::Harness
