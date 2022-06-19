@@ -19,6 +19,7 @@ no_index:
     - t
     - inc
 requires:
+  IO::Socket::IP: '0'
   Digest::SHA1: '0'
   File::Copy: '0'
   File::Spec: '0'
